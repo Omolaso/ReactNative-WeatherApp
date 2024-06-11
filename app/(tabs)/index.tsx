@@ -1,8 +1,16 @@
 import React from "react";
-import CurrentWeather from "@/components/myComponents/CurrentWeather";
+import CurrentWeather from "@/screens/CurrentWeather";
+// import UpcomingWeather from "@/screens/UpcomingWeather";
+// import City from "@/screens/City";
 
 const App = () => {
-  return <CurrentWeather />;
+  return (
+    <>
+      <CurrentWeather />
+      {/* <UpcomingWeather /> */}
+      {/* <City /> */}
+    </>
+  );
 };
 
 export default App;
