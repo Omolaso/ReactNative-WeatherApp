@@ -1,16 +1,9 @@
 import React from "react";
 import CurrentWeather from "@/screens/CurrentWeather";
-// import UpcomingWeather from "@/screens/UpcomingWeather";
-// import City from "@/screens/City";
 
+//api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key}
 const App = () => {
-  return (
-    <>
-      <CurrentWeather />
-      {/* <UpcomingWeather /> */}
-      {/* <City /> */}
-    </>
-  );
+  return <CurrentWeather />;
 };
 
 export default App;

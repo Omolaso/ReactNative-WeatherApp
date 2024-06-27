@@ -4,7 +4,6 @@ import {
   SafeAreaView,
   StyleSheet,
   View,
-  Text,
   FlatList,
   StatusBar,
   ImageBackground,
@@ -38,7 +37,6 @@ const UpcomingWeather = () => {
         style={styles.image}
       >
         <View style={styles.weatherView}>
-          <Text style={styles.text}>UpcomingWeather</Text>
           <FlatList
             data={renderedData}
             renderItem={({ item }) => <ListItem prop={item} />}
