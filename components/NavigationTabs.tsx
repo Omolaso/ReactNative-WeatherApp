@@ -4,8 +4,13 @@ import { TabBarIcon } from "@/components/navigation/TabBarIcon";
 
 import { Colors } from "@/constants/Colors";
 import { useColorScheme } from "@/hooks/useColorScheme";
+import { WeatherProps } from "@/types/weather";
 
-const NavigationTabs = () => {
+const NavigationTabs = ({
+  weatherData,
+}: {
+  weatherData: WeatherProps | null;
+}) => {
   const colorScheme = useColorScheme();
 
   return (
@@ -26,7 +31,7 @@ const NavigationTabs = () => {
             />
           ),
         }}
-      />
+      />  {/* START HERE */}
       <Tabs.Screen
         name="city"
         options={{
