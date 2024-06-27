@@ -1,5 +1,4 @@
-import React from "react";
-import { WeatherListProps } from "@/types/weather";
+import React, { useContext } from "react";
 import {
   SafeAreaView,
   StyleSheet,
@@ -9,27 +8,13 @@ import {
   ImageBackground,
 } from "react-native";
 import ListItem from "@/components/ListItem";
-
-const renderedData: WeatherListProps[] = [
-  {
-    dt_txt: "2022-09-03 15:00:00",
-    dt: 1662217200,
-  },
-  {
-    dt_txt: "2022-08-30 16:00:00",
-    dt: 1661875200,
-  },
-  {
-    dt_txt: "2022-08-30 17:00:00",
-    dt: 1661878800,
-  },
-  {
-    dt_txt: "2022-08-30 18:00:00",
-    dt: 1661882400,
-  },
-];
+import { WeatherContext } from "@/app/(tabs)/_layout";
 
 const UpcomingWeather = () => {
+  const weatherData = useContext(WeatherContext);
+
+  const weatherList = weatherData?.list;
+
   return (
     <SafeAreaView style={styles.container}>
       <ImageBackground
@@ -38,7 +23,7 @@ const UpcomingWeather = () => {
       >
         <View style={styles.weatherView}>
           <FlatList
-            data={renderedData}
+            data={weatherList}
             renderItem={({ item }) => <ListItem prop={item} />}
             keyExtractor={(item) => item.dt_txt as string}
           />

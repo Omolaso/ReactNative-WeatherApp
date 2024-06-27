@@ -34,9 +34,13 @@ export const useGetWeather = () => {
   };
 
   const getData = async () => {
+    if (!location.latitude || !location.longitude) {
+      return;
+    }
+
     try {
       const res = await axiosFetcher.get(
-        `/forecast?lat=${location?.latitude}&lon=${location?.longitude}&appid=${projectAPIKEY}`
+        `/forecast?lat=${location?.latitude}&lon=${location?.longitude}&appid=${projectAPIKEY}&units=metric`
       );
 
       const data = await res.data;

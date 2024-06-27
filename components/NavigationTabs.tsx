@@ -1,16 +1,10 @@
 import React from "react";
 import { Tabs } from "expo-router";
 import { TabBarIcon } from "@/components/navigation/TabBarIcon";
-
 import { Colors } from "@/constants/Colors";
 import { useColorScheme } from "@/hooks/useColorScheme";
-import { WeatherProps } from "@/types/weather";
 
-const NavigationTabs = ({
-  weatherData,
-}: {
-  weatherData: WeatherProps | null;
-}) => {
+const NavigationTabs = () => {
   const colorScheme = useColorScheme();
 
   return (
@@ -23,7 +17,7 @@ const NavigationTabs = ({
       <Tabs.Screen
         name="index"
         options={{
-          title: "Home",
+          title: "Current",
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon
               name={focused ? "home" : "home-outline"}
@@ -31,7 +25,8 @@ const NavigationTabs = ({
             />
           ),
         }}
-      />  {/* START HERE */}
+      />
+
       <Tabs.Screen
         name="city"
         options={{
@@ -44,6 +39,7 @@ const NavigationTabs = ({
           ),
         }}
       />
+
       <Tabs.Screen
         name="upcoming"
         options={{

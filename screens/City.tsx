@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   ImageBackground,
   SafeAreaView,
@@ -7,9 +7,20 @@ import {
   Text,
   View,
 } from "react-native";
+import moment from "moment";
 import IconText from "@/components/IconText";
+import { WeatherContext } from "@/app/(tabs)/_layout";
 
 const City = () => {
+  const weatherData = useContext(WeatherContext);
+
+  const currentCity = weatherData?.city;
+
+  const sunriseTime = moment(currentCity?.sunrise as number).format(
+    "h:mm:ss a"
+  );
+  const sunsetTime = moment(currentCity?.sunset as number).format("h:mm:ss a");
+
   const {
     container,
     cityText,
@@ -27,12 +38,12 @@ const City = () => {
         source={require("@/assets/images/weather-image/city-bg.jpg")}
         style={cityBackground}
       >
-        <Text style={[cityText, cityName]}>Lagos</Text>
-        <Text style={[cityText, countryName]}>Nigeria</Text>
+        <Text style={[cityText, cityName]}>{currentCity?.name}</Text>
+        <Text style={[cityText, countryName]}>{currentCity?.country}</Text>
 
         <View style={[totalPeople, populationContainer]}>
           <IconText
-            textValue={"8000"}
+            textValue={`Population: ${currentCity?.population.toLocaleString()}`}
             iconName={"user"}
             size={24}
             color={"white"}
@@ -41,13 +52,13 @@ const City = () => {
 
         <View style={[riseSet, populationContainer]}>
           <IconText
-            textValue={"10:30:00"}
+            textValue={`${sunriseTime}`}
             iconName={"sunrise"}
             size={30}
             color={"white"}
           />
           <IconText
-            textValue={"19:32:21"}
+            textValue={`${sunsetTime}`}
             iconName={"sunset"}
             size={30}
             color={"white"}
