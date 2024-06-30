@@ -1,37 +1,22 @@
-import { Tabs } from 'expo-router';
-import React from 'react';
+import React, { createContext } from "react";
+import { useGetWeather } from "@/hooks/useGetWeather";
+import { WeatherProps } from "@/types/weather";
+import NavigationTabs from "@/components/NavigationTabs";
+import Loader from "@/utils/Loader";
 
-import { TabBarIcon } from '@/components/navigation/TabBarIcon';
-import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
+export const WeatherContext = createContext<WeatherProps | null>(null);
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
+  const { weatherData, isLoading, error } = useGetWeather();
 
+  if (isLoading) return <Loader />;
+
+  if (error) {
+    console.log("error -", error);
+  }
   return (
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        headerShown: false,
-      }}>
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: 'Home',
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'home' : 'home-outline'} color={color} />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="explore"
-        options={{
-          title: 'Explore',
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'code-slash' : 'code-slash-outline'} color={color} />
-          ),
-        }}
-      />
-    </Tabs>
+    <WeatherContext.Provider value={weatherData}>
+      <NavigationTabs />
+    </WeatherContext.Provider>
   );
 }
